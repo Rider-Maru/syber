@@ -125,7 +125,7 @@ videoFront.addEventListener("loadedmetadata", function (e) {
         }
         var val = allPicColor / (canvasFront.height * canvasFront.width);
         JudgeAutorize(val);
-        document.getElementById("debug").textContent = val;
+        document.getElementById("debug2").textContent = val;
         ctx.putImageData(imagedata, 0, 0, 0, 0, canvasFront.width, canvasFront.height);
     }, 33);
 });
