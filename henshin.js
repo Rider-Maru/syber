@@ -24,8 +24,8 @@ var mySwiper = new Swiper('.swiper-container', {
     loop: true,
 });
 function finishAudioLoading() {
-        mediasBack.videoBack.facingMode = { exact: "environment" };
-        mediasFront.videoFront.facingMode = { exact: "user" };
+        mediasBack.video.facingMode = { exact: "environment" };
+        mediasFront.video.facingMode = { exact: "user" };
 
     document.getElementById("str").textContent = mediasBack;
     document.getElementById("debug").textContent = mediasFront;
