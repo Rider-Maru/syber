@@ -23,13 +23,12 @@ var mediasBack = { audio: false, video: {} };
 var mySwiper = new Swiper('.swiper-container', {
     loop: true,
 });
-
 function finishAudioLoading() {
         mediasBack.videoBack.facingMode = { exact: "environment" };
         mediasFront.videoFront.facingMode = { exact: "user" };
 
-    document.getElementById("str").textContent = "environment";
-
+    document.getElementById("str").textContent = mediasBack;
+    document.getElementById("debug").textContent = mediasFront;
     //getUserMediaを用いて、webカメラの映像を取得
     navigator.mediaDevices.getUserMedia(mediasFront).then(
         function (stream) {
@@ -89,7 +88,7 @@ videoBack.addEventListener("loadedmetadata", function (e) {
         }
         var val = allPicColor / (canvasBack.height * canvasBack.width);
         JudgeAutorize(val);
-        document.getElementById("debug").textContent = val;
+        //document.getElementById("debug").textContent = val;
         ctx.putImageData(imagedata, 0, 0, 0, 0, canvasBack.width, canvasBack.height);
     }, 33);
 });
