@@ -114,7 +114,7 @@ function JudgeAutorize(value) {
 // ========================================
 function ring() {
     isAuthorizable = true;
-    if (AutorizeNum == 2) {
+    if (false) {
         playSECallKey(1)
     } else {
         AutorizeNum = 1;
