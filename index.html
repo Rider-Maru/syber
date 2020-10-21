@@ -35,23 +35,6 @@ left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
             opacity: 1;
-        }        .square-buttonFront {
-left: 50%;
-	min-height: 50%;
-	min-width: 100%;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
-            opacity: 1;
-        }
-	}        .square-buttonBack {
-left: 50%;
-	min-height: 50%;
-	min-width: 100%;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
-            opacity: 1;
         }
 
         p.button {
@@ -90,16 +73,14 @@ left: 50%;
 	<!--<button id="square-button2" type="submit"><img src="picture/key_rising_hopper.png" /></button>
 	<button id="square-button" type="submit" onclick="ring();"><img src="picture/key_rising_hopper.png" /></button>
 	-->
-		<video id="videoFront" autoplay playsinline="true" class=square-buttonFront ></video>></video>
-		<video id="videoBack" autoplay playsinline="true" class=square-buttonBack></video>></video>
-		<canvas id="canvasFront" hidden></canvas>
-		<canvas id="canvasBack" hidden></canvas>
+		<video id="video" autoplay playsinline="true" class=square-button2></video>></video>
+		<canvas id="canvas" hidden></canvas>
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		<div class="swiper-slide">
-			<!--<img id = "key" src="picture/key_awaking_arsino.png" class=square-button2></img>--><img id = "key" src="" class=square-button2>
+			<img id = "key" src="picture/key_awaking_arsino.png" class=square-button2></img>
 			<a href="#" onclick="ring();" class=square-button>
-				<!--<img id = "key_light" src="picture/key_awaking_arsino_light.png" class=square-button></img>--><img id = "key_light" src="" class=square-button2>
+				<img id = "key_light" src="picture/key_awaking_arsino_light.png" class=square-button></img>
 			</a>
 		</div>
 	</div>
@@ -118,7 +99,6 @@ left: 50%;
 
 	<div id="str">このタグの中身を書き換えます。</div>
 	<div id="debug">このタグの中身を書き換えます。</div>
-	<div id="debug2">このタグの中身を書き換えます。</div>
 	<div id="debug_bool">このタグの中身を書き換えます。</div>
 	<div id="debug_gain">このタグの中身を書き換えます。</div>
 </body>

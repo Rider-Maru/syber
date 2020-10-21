@@ -15,36 +15,29 @@ var srcsKeyLight = new Array("picture/key_awaking_arsino_light.png", "picture/ke
 
 var threshold = 23;
 //videoタグを取得
-var videoFront = document.getElementById("videoFront");
-var videoBack = document.getElementById("videoBack");
+var video = document.getElementById("video");
 //取得するメディア情報を指定
-var mediasFront = { audio: false, video: {} };
-var mediasBack = { audio: false, video: {} };
-var mySwiper = new Swiper('.swiper-container', {
-    loop: true,
-});
-function finishAudioLoading() {
-        mediasBack.video.facingMode = { exact: "environment" };
-        mediasFront.video.facingMode = { exact: "user" };
+var medias = { audio: false, video: {} };
 
-    //document.getElementById("str").textContent = mediasBack;
-    //document.getElementById("debug").textContent = mediasFront;
+var mySwiper = new Swiper('.swiper-container', {
+    loop: false,
+});
+
+function finishAudioLoading() {
+    if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i)) {
+        medias.video.facingMode = { exact: "environment" };
+    } else {
+        medias.video.facingMode = { exact: "user" };
+    }
+
+    document.getElementById("str").textContent = "environment";
+
     //getUserMediaを用いて、webカメラの映像を取得
-    navigator.mediaDevices.getUserMedia(mediasFront).then(
+    navigator.mediaDevices.getUserMedia(medias).then(
         function (stream) {
             //videoタグのソースにwebカメラの映像を指定
-            videoFront.srcObject = stream;
-        }
-    ).catch(
-        function (err) {
-            //カメラの許可がされなかった場合にエラー
-            window.alert("not allowed to use camera");
-        }
-    );
-    navigator.mediaDevices.getUserMedia(mediasBack).then(
-        function (stream) {
-            //videoタグのソースにwebカメラの映像を指定
-            videoBack.srcObject = stream;
+            video.srcObject = stream;
+
         }
     ).catch(
         function (err) {
@@ -53,26 +46,25 @@ function finishAudioLoading() {
         }
     );
 }
-var canvasFront = document.getElementById("canvasFront");
-var canvasBack = document.getElementById("canvasBack");
+var canvas = document.getElementById("canvas");
 //ビデオのメタデータが読み込まれるまで待つ
-videoBack.addEventListener("loadedmetadata", function (e) {
+video.addEventListener("loadedmetadata", function (e) {
     //canvasにカメラの映像のサイズを設定
-    canvasBack.width = videoBack.videoWidth/3;
-    canvasBack.height = videoBack.videoHeight/3;
+    canvas.width = video.videoWidth/3;
+    canvas.height = video.videoHeight/3;
 
     //getContextで描画先を取得
-    var ctx = canvasBack.getContext("2d");
+    var ctx = canvas.getContext("2d");
     //毎フレームの実行処理
     setInterval(function (e) {
         //console.log("releaseCamera:" + releaseCamera + "/" +"isAuthorizable:"+isAuthorizable);
-        ctx.drawImage(videoBack, 0, 0, canvasBack.width, canvasBack.height);
-        var imagedata = ctx.getImageData(0, 0, canvasBack.width, canvasBack.height);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
         var data = imagedata.data;
         var allPicColor = 0;
-        for (var i = 0; i < canvasBack.height; i++) {
-            for (var j = 0; j < canvasBack.width; j++) {
-                var index = (i * canvasBack.width + j) * 4;
+        for (var i = 0; i < canvas.height; i++) {
+            for (var j = 0; j < canvas.width; j++) {
+                var index = (i * canvas.width + j) * 4;
                 //元のピクセルカラーを取得
                 var r = data[index + 0];
                 var g = data[index + 1];
@@ -86,58 +78,24 @@ videoBack.addEventListener("loadedmetadata", function (e) {
                 allPicColor += color;
             }
         }
-        var val = allPicColor / (canvasBack.height * canvasBack.width);
+        var val = allPicColor / (canvas.height * canvas.width);
         JudgeAutorize(val);
         document.getElementById("debug").textContent = val;
-        ctx.putImageData(imagedata, 0, 0, 0, 0, canvasBack.width, canvasBack.height);
+        ctx.putImageData(imagedata, 0, 0, 0, 0, canvas.width, canvas.height);
     }, 33);
-});
-videoFront.addEventListener("loadedmetadata", function (e) {
-    //canvasにカメラの映像のサイズを設定
-    canvasFront.width = videoFront.videoWidth/3;
-    canvasFront.height = videoFront.videoHeight/3;
+        
 
-    //getContextで描画先を取得
-    var ctx = canvasFront.getContext("2d");
-    //毎フレームの実行処理
-    setInterval(function (e) {
-        //console.log("releaseCamera:" + releaseCamera + "/" +"isAuthorizable:"+isAuthorizable);
-        ctx.drawImage(videoFront, 0, 0, canvasFront.width, canvasFront.height);
-        var imagedata = ctx.getImageData(0, 0, canvasFront.width, canvasFront.height);
-        var data = imagedata.data;
-        var allPicColor = 0;
-        for (var i = 0; i < canvasFront.height; i++) {
-            for (var j = 0; j < canvasFront.width; j++) {
-                var index = (i * canvasFront.width + j) * 4;
-                //元のピクセルカラーを取得
-                var r = data[index + 0];
-                var g = data[index + 1];
-                var b = data[index + 2];
-
-                //RGBをグレースケールに変換
-                var color = Math.round(r * 0.299 + g * 0.587 + b * 0.114);
-                data[index + 0] = color;
-                data[index + 1] = color;
-                data[index + 2] = color;
-                allPicColor += color;
-            }
-        }
-        var val = allPicColor / (canvasFront.height * canvasFront.width);
-        JudgeAutorize(val);
-        document.getElementById("debug2").textContent = val;
-        ctx.putImageData(imagedata, 0, 0, 0, 0, canvasFront.width, canvasFront.height);
-    }, 33);
 });
 
 
 function JudgeAutorize(value) {
-    console.log(value);
     if (value < threshold) {
         if (!onAuthorize) {
             onAuthorize = true;
             ringByCamera(1);
             document.getElementById("debug_bool").textContent = "true";
         }
+ 
     }
     else {
         if (onAuthorize) {
@@ -148,6 +106,7 @@ function JudgeAutorize(value) {
         }
        
     }
+    
 }
 
 // ========================================
