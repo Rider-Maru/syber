@@ -131,16 +131,16 @@ function ringByCamera(callNum) {
     var isRing = false;
     var waitTime = 3000;
     if (!isAuthorizable) return;
-/*
-    if (callNum == 1 && AutorizeNum == 1) {
+
+    if (callNum == 1 && AutorizeNum == 2) {
         waitTime = 3000;
         isRing = true;
         onStandBy = true;
         //releaseCamera = false;
         document.getElementById("key").src = srcsKey[1];
         document.getElementById("key_light").src = srcsKeyLight[1];
-        playSEBelt(mySwiper.realIndex);
-     }*/
+        playSECallKey(1);
+     }
     if (callNum == 2) {
         isRing = true;
         if (onStandBy) SEstandbyStop();
@@ -153,7 +153,7 @@ function ringByCamera(callNum) {
             document.getElementById("key_light").src = srcsKeyLight[1];
             playSEBelt(mySwiper.realIndex);
          }
-        else if (AutorizeNum == 2) {
+        else if (AutorizeNum == 3) {
                 waitTime = 2500;
                 playSECallFunction(mySwiper.realIndex);
                 document.getElementById("key").src = srcsKey[2];

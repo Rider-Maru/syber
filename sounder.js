@@ -95,7 +95,7 @@ var lightLayer = document.getElementsByClassName('square-button');
     bufferLoader = new BufferLoader(
         context,
         [
-            'audio/zetsumetsuEvolution.mp3',
+            'audio/braveDragon_plot.mp3',
             'audio/standbyLoop.mp3',
             'audio/nonSound.mp3',
         ],
@@ -113,10 +113,10 @@ function finishedLoading(bufferList) {
         bufferLoader = new BufferLoader(
             context,
             [
-                'audio/thousandDriver.mp3',
-                'audio/presentedByZaia.mp3',
-                'audio/thousandDistraction.mp3',
-                'audio/breakHorn.mp3',
+                'audio/braveDragon.mp3',
+                'audio/braveDragon_henshin.mp3',
+                'audio/nonSound.mp3',
+                'audio/close.mp3',
                 /*
                 'audio/.mp3',
                 'audio/.mp3',
@@ -149,9 +149,22 @@ function playSECallKey(callNum) {
 
     soundArrayKey[num].connect(analyser);
     soundArrayKey[num].start(0);
+    if(callNum==1){
+    soundArrayCommon[num].onended = function () {
+        if (nowplaynumCommon == null) return;
+        if (onStandByMetal) return;
+        nowplaynumLoop = 1;
+        if (callNum == rockingNum) nowplaynumLoop = 8;
+        soundArrayCommon[nowplaynumLoop].loop = true;
+        soundArrayCommon[nowplaynumLoop].start(0);
+            onRingingStandby = true;
+    }
+}
+else {
     soundArrayKey[num] = context.createBufferSource();
     soundArrayKey[num].buffer = bufferListUpKey[num];
     soundArrayKey[num].connect(context.destination); 
+}
 }
 
 function playSECallFunction(callNum) {
@@ -192,6 +205,7 @@ function playSEBelt(callNum) {
     console.log("Belt"+num);
     soundArrayCommon[num].connect(analyser);
     soundArrayCommon[num].start(0);
+    /*
     soundArrayCommon[num].onended = function () {
         if (nowplaynumCommon == null) return;
         if (onStandByMetal) return;
@@ -201,6 +215,7 @@ function playSEBelt(callNum) {
         soundArrayCommon[nowplaynumLoop].start(0);
             onRingingStandby = true;
     }
+    */
 }
 
 function playSELetsRise() {
