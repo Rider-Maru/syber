@@ -9,8 +9,8 @@ var onAuthorize = false;
 
 var releaseCamera = true;
 
-var srcsKey = new Array("picture/braveDragon_1p.png", "picture/braveDragon_2p.png");
-var srcsKeyLight = new Array("picture/braveDragon_1p_light.png", "picture/braveDragon_2p_light.png");
+var srcsKey = new Array("picture/braveDragon_0p.png", "picture/braveDragon_1p.png", "picture/braveDragon_2p.png");
+var srcsKeyLight = new Array("picture/braveDragon_0p.png", "picture/braveDragon_1p_light.png", "picture/braveDragon_2p_light.png");
 //var mySwiper.realIndex = 0;
 
 var threshold = 23;
@@ -131,7 +131,7 @@ function ringByCamera(callNum) {
     var isRing = false;
     var waitTime = 3000;
     if (!isAuthorizable) return;
-
+/*
     if (callNum == 1 && AutorizeNum == 1) {
         waitTime = 3000;
         isRing = true;
@@ -140,17 +140,31 @@ function ringByCamera(callNum) {
         document.getElementById("key").src = srcsKey[1];
         document.getElementById("key_light").src = srcsKeyLight[1];
         playSEBelt(mySwiper.realIndex);
-     }
-    else if (callNum == 2) {
+     }*/
+    if (callNum == 2) {
         isRing = true;
         if (onStandBy) SEstandbyStop();
-        if (AutorizeNum == 2) {
+        if(AutorizeNum == 1) {
+            waitTime = 3000;
+            isRing = true;
+            onStandBy = true;
+            //releaseCamera = false;
+            document.getElementById("key").src = srcsKey[1];
+            document.getElementById("key_light").src = srcsKeyLight[1];
+            playSEBelt(mySwiper.realIndex);
+         }
+        else if (AutorizeNum == 2) {
                 waitTime = 2500;
                 playSECallFunction(mySwiper.realIndex);
+                document.getElementById("key").src = srcsKey[2];
+            document.getElementById("key_light").src = srcsKeyLight[2];
         }
         else if (AutorizeNum == 3) {
+            //必殺技
+            /*
             waitTime = 2500;
             playSECallFinish(mySwiper.realIndex);
+            */
         }
     }
     if (isRing) {
