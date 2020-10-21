@@ -133,7 +133,7 @@ function ringByCamera(callNum) {
     if (!isAuthorizable) return;
 
     if (callNum == 1 && AutorizeNum == 2) {
-        waitTime = 3000;
+        waitTime = 1000;
         isRing = true;
         onStandBy = true;
         //releaseCamera = false;
@@ -145,7 +145,7 @@ function ringByCamera(callNum) {
         isRing = true;
         if (onStandBy) SEstandbyStop();
         if(AutorizeNum == 1) {
-            waitTime = 3000;
+            waitTime = 1500;
             isRing = true;
             onStandBy = true;
             //releaseCamera = false;
