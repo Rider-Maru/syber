@@ -9,8 +9,8 @@ var onAuthorize = false;
 
 var releaseCamera = true;
 
-var srcsKey = new Array("picture/braveDragon_1p_dark.png", "picture/braveDragon_2p.png");
-var srcsKeyLight = new Array("picture/braveDragon_1p.png", "picture/braveDragon_2p_light.png");
+var srcsKey = new Array("picture/braveDragon_1p.png", "picture/braveDragon_2p.png");
+var srcsKeyLight = new Array("picture/braveDragon_1p_light.png", "picture/braveDragon_2p_light.png");
 //var mySwiper.realIndex = 0;
 
 var threshold = 23;
