@@ -24,11 +24,11 @@ var mySwiper = new Swiper('.swiper-container', {
 });
 
 function finishAudioLoading() {
-    if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i)) {
+    /*if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i)) {
         medias.video.facingMode = { exact: "environment" };
-    } else {
+    } else {*/
         medias.video.facingMode = { exact: "user" };
-    }
+    //}
 
     document.getElementById("str").textContent = "environment";
 
