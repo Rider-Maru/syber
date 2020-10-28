@@ -146,12 +146,12 @@ function playSECallKey(callNum) {
     }
     console.log("Key" + num);
     var num = callNum * 3;
-
+    nowplaynumKey = num;
     soundArrayKey[num].connect(analyser);
     soundArrayKey[num].start(0);
     if(callNum==1){
-    soundArrayCommon[num].onended = function () {
-        if (nowplaynumCommon == null) return;
+    soundArrayKey[num].onended = function () {
+        if (nowplaynumKey == null) return;
         if (onStandByMetal) return;
         nowplaynumLoop = 1;
         if (callNum == rockingNum) nowplaynumLoop = 8;
