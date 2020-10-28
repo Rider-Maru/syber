@@ -58,7 +58,7 @@ video.addEventListener("loadedmetadata", function (e) {
     //毎フレームの実行処理
     setInterval(function (e) {
         //console.log("releaseCamera:" + releaseCamera + "/" +"isAuthorizable:"+isAuthorizable);
-        console.log(onRingingStandby);
+        //console.log(onRingingStandby);
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
         var data = imagedata.data;
@@ -115,6 +115,7 @@ function JudgeAutorize(value) {
 // ========================================
 function ring() {
     isAuthorizable = true;
+    SEstandbyStop();
     if (false) {
         playSECallKey(1)
     } else {
