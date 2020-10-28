@@ -144,6 +144,7 @@ function playSECallKey(callNum) {
         alert('オーディオデータをロード中です');
         return;
     }
+    stopSE();
     console.log("Key" + num);
     var num = callNum * 3;
     nowplaynumKey = num;
